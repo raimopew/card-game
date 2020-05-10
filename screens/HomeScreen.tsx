@@ -1,8 +1,39 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
+import { db } from '../src/config.jsx';
 
-export default function HomeScreen({ navigation }) {
+let addQuestion = (quest, cat) => {
+  db.ref('/questions').push({
+    question: quest,
+    category: cat
+  });
+};
+
+
+export default class HomeScreen extends Component {
+
+
+  state = {
+    question: '',
+    category: ''
+  };
+
+  handleChange = e => {
+    this.setState({
+      question: e.nativeEvent.text,
+      category: e.nativeEvent.text,
+    });
+  };
+
+  handleSubmit = () => {
+    addQuestion(this.state.question, this.state.category);
+    Alert.alert('Quetion saved successfully');
+  };
+
+
+render() {
+  const { navigation } = this.props;
     return (
         <View>
             <Button
@@ -13,12 +44,34 @@ export default function HomeScreen({ navigation }) {
             </Button>
             <TextInput
                 style={styles.input}
-                label='Test'
+                label='Question'
                 mode="outlined"
+                onChange = {this.handleChange}
             />
+            <TextInput
+                style={styles.input}
+                label='Category'
+                mode="outlined"
+                onChange = {this.handleChange}
+            />
+            <Button
+            color="#841584"
+            onPress={this.handleSubmit}>
+            Upload
+            </Button>
+
         </View>
     );
+  }
 }
+
+
+
+
+
+
+
+
 
 const styles = StyleSheet.create({
     input: {
