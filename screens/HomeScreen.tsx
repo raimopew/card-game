@@ -3,32 +3,39 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { db } from '../src/config.jsx';
 
-let addQuestion = (quest, cat) => {
+let addQuestion = (question, category) => {
   db.ref('/questions').push({
-    question: quest,
-    category: cat
+    question: question,
+    category: category
   });
 };
 
 
 export default class HomeScreen extends Component {
 
-
-  state = {
+constructor() {
+  super();
+  this.state = {
     question: '',
     category: ''
   };
 
-  handleChange = e => {
-    this.setState({
-      question: e.nativeEvent.text,
-      category: e.nativeEvent.text,
-    });
-  };
+  this.handleQuestionChange = this.handleQuestionChange.bind(this);
+  this.handleCategoryChange = this.handleCategoryChange.bind(this);
+}
+
+  handleQuestionChange (e) {
+    this.setState({ question: e.nativeEvent.text });
+  }
+
+  handleCategoryChange (e) {
+    this.setState({ category: e.nativeEvent.text });
+  }
+
 
   handleSubmit = () => {
     addQuestion(this.state.question, this.state.category);
-    Alert.alert('Quetion saved successfully');
+    Alert.alert('Question saved successfully');
   };
 
 
@@ -46,13 +53,15 @@ render() {
                 style={styles.input}
                 label='Question'
                 mode="outlined"
-                onChange = {this.handleChange}
+                value={this.state.question}
+                onChange = {this.handleQuestionChange}
             />
             <TextInput
                 style={styles.input}
                 label='Category'
                 mode="outlined"
-                onChange = {this.handleChange}
+                value={this.state.category}
+                onChange = {this.handleCategoryChange}
             />
             <Button
             color="#841584"
