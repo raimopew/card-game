@@ -3,12 +3,14 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { db } from '../src/config.jsx';
 import AsyncStorage from '@react-native-community/async-storage';
+import { red100 } from 'react-native-paper/lib/typescript/src/styles/colors';
 
 export default class HomeScreen extends Component {
 
 constructor() {
   super();
   this.state = {
+	title: "Pick a category",
     data: {},
     categories: []
   };
@@ -69,6 +71,9 @@ render() {
   const { categories} = this.state;
     return (
         <View>
+        <Text style={styles.title}>
+          {this.state.title}
+        </Text>
           {categories.map((item, i) =><View key = {i}><Button
                 icon="rocket"
                 mode="contained"
@@ -82,18 +87,17 @@ render() {
   }
 }
 
-
-
-
-
-
-
-
-
 const styles = StyleSheet.create({
     input: {
         marginTop: 20,
         width: 300,
         alignSelf: "center"
-    },
+	},
+	title: {
+		fontSize: 20,
+		fontWeight: "bold",
+		textAlign: "center",
+		marginBottom: 20,
+		marginTop: 20
+	}
 });
