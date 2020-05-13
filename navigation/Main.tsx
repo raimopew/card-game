@@ -4,6 +4,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import HomeScreen from "../screens/HomeScreen";
 import GameScreen from "../screens/GameScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import ThemeScreen from "../screens/ThemeScreen";
 
 const Tab  = createMaterialTopTabNavigator();
 
@@ -21,6 +22,10 @@ export default function Main() {
             <Tab.Screen
                 name="Settings"
                 component={SettingsScreen}
+            />
+            <Tab.Screen
+                name="Pick Theme"
+                component={ThemeScreen}
             />
         </Tab.Navigator>
     );
