@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { db } from '../src/config.jsx';
+import AsyncStorage from '@react-native-community/async-storage';
 
 let selectedTheme = ""; // TODO: this should come in from a different view
 
@@ -13,7 +14,8 @@ export default class GameScreen extends React.Component {
           questions: [],
           currentQuestion: {
               question: ""
-          }
+          },
+          data: {}
       };
     }
 
@@ -56,11 +58,25 @@ export default class GameScreen extends React.Component {
         this.state.currentQuestion = questionsArr[Math.floor(Math.random() * questionsArr.length)];
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         this.readQuestions();
         this.setCurrentQuestion();
+        await this.getCategory();
     }
     
+    getCategory = async() => { 
+        const category = await AsyncStorage.getItem('category')
+        console.log(category)
+    }
+
+    fetchData = async() => {
+        console.log(this.state.questions)
+        const ref = db.ref('/questions')
+        await ref.on('value', (snapshot) => { this.setState({
+          data: snapshot.val()
+        }) }, (err: string) => console.log(err))
+      }
+
     render() {
       const { navigation } = this.props;
         return (
