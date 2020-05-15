@@ -110,7 +110,8 @@ export default class GameScreen extends React.Component {
     const { navigation } = this.props;
     const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
     return (
-      <View>
+      <View 
+      style={styles.container}>
         <Modal
           animationType="slide"
           transparent={true}
@@ -132,19 +133,15 @@ export default class GameScreen extends React.Component {
             </View>
         </Modal>
         <Button
-          icon="rocket"
-          mode="contained"
-          onPress={() => navigation.navigate('Settings')}
-        >
-          Go to Settings
-        </Button>
-        <Button
           style={styles.button}
           icon="rocket"
           mode="contained"
           onPress={() => navigation.goBack()}>
             Go back
         </Button>
+        <Card style={styles.card}>
+          <Card.Title title={this.state.currentQuestion} subtitle={this.state.category} left={LeftContent} />
+        </Card>
         <Button 
           style={styles.button}
           icon="rocket"
@@ -152,21 +149,21 @@ export default class GameScreen extends React.Component {
           onPress={this.handleNextQuestion}>
           Next question
         </Button>
-        <Card>
-          <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
-          <Card.Content>
-            <Title>{this.state.currentQuestion}</Title>
-            <Paragraph>Category: {this.state.category}</Paragraph>
-          </Card.Content>
-        </Card>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white"
+  },
+  card: {
+    paddingTop: 20
+  },
   button: {
     marginTop: 20,
+    
   },
   modalWindow: {
     flex: 1,

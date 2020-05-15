@@ -53,7 +53,7 @@ constructor(props) {
 render() {
   const { navigation } = this.props;
     return (
-        <View>
+        <View style={styles.container}>
             <Button
                 icon="rocket"
                 mode="contained"
@@ -110,6 +110,10 @@ render() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 400,
+    
+  },
   input: {
       marginTop: 20,
       width: 300,

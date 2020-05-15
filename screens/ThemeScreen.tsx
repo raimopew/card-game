@@ -37,12 +37,15 @@ componentDidUpdate = () => {
 setCategories = () => {
   const values = []
   for(let [key, value] of Object.entries(this.state.data)) {
-    values.push(value)
+    const item = value.category
+    if ( values.indexOf(value.category) === -1 ) values.push(value.category)
   }
+
   this.setState({
     categories: values
   })
 }
+
 
 handlePress = async(value) => {
   const { navigation } = this.props;
@@ -77,9 +80,9 @@ render() {
           {categories.map((item, i) =><View key = {i}><Button
                 icon="rocket"
                 mode="contained"
-                onPress={() => this.handlePress(item.category)}
+                onPress={() => this.handlePress(item)}
                 >
-                    {item.category}
+                    {item}
             </Button></View>)}
            
         </View>
