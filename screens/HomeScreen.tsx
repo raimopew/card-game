@@ -33,9 +33,13 @@ constructor() {
   }
 
 
-  handleSubmit = () => {
+    handleSubmit = () => {
+    if(this.state.question.length < 6){
+      Alert.alert('Question must be atleast 6 letters long!');
+    } else{
     addQuestion(this.state.question, this.state.category);
     Alert.alert('Question saved successfully');
+    }
   };
 
 
