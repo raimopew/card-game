@@ -7,7 +7,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 import ThemeScreen from "../screens/ThemeScreen";
 
 const Tab  = createMaterialTopTabNavigator();
-
+console.disableYellowBox = true;
 export default function Main() {
     return (
         <Tab.Navigator style={styles.nav} initialRouteName="Home">
@@ -16,16 +16,12 @@ export default function Main() {
                 component={HomeScreen}
             />
             <Tab.Screen
-                name="Game"
-                component={GameScreen}
-            />
-            <Tab.Screen
-                name="Settings"
-                component={SettingsScreen}
-            />
-            <Tab.Screen
                 name="Themes"
                 component={ThemeScreen}
+            />
+            <Tab.Screen
+                name="Game"
+                component={GameScreen}
             />
         </Tab.Navigator>
     );

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, AsyncStorage } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { db } from '../src/config.jsx';
-import AsyncStorage from '@react-native-community/async-storage';
 import { red100 } from 'react-native-paper/lib/typescript/src/styles/colors';
 
 export default class HomeScreen extends Component {
@@ -54,6 +53,7 @@ handlePress = async(value) => {
       index: 1,
       routes: [{ name: 'Game' }],
     });
+    navigation.navigate("Game");
   } catch (error) {
     console.log(error)
   }
@@ -99,5 +99,5 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		marginBottom: 20,
 		marginTop: 20
-	}
+  }
 });
