@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, ToggleButton } from 'react-native-paper';
+import { Audio } from 'expo-av';
 
-export default function SettingsScreen({ navigation }) {
+export default class SettingsScreen extends Component {
+
+
+
+
+  async componentDidMount() {
+  this.backgroundMusic = new Audio.Sound();
+  try {
+    await this.backgroundMusic.loadAsync(
+      require("../assets/music/Jump_Around.mp3")
+    );
+    await this.backgroundMusic.setIsLoopingAsync(true);
+    await this.backgroundMusic.playAsync();
+  } catch (error) {
+  }
+
+}
+
+
+
+
+
+render () {
+  const { navigation } = this.props;
     return (
         <View>
             <Button
@@ -18,12 +42,26 @@ export default function SettingsScreen({ navigation }) {
                 onPress={() => navigation.goBack()}>
                     Go back
             </Button>
+            <Button
+              style={styles.button}
+              mode="outlined"
+              onPress={() => this.backgroundMusic.stopAsync()}>
+              Music off
+            </Button>
+            <Button
+              style={styles.button}
+              mode="outlined"
+              onPress={() => this.backgroundMusic.playAsync()}>
+              Music on
+            </Button>
+
         </View>
     );
+  }
 }
 
 const styles = StyleSheet.create({
     button: {
-        marginTop: 20 
+        marginTop: 20
     },
 });
