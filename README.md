@@ -6,9 +6,9 @@ Available for Web, iOS and Android.
 
 ## Features
 
+* Answer or skip questions
 * Choose question categories
-* Add and remove questions
-* Optional music playback
+* Add or remove questions
 * Have fun
 
 ## Getting Started
