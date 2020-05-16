@@ -34,13 +34,14 @@ export default class HomeScreen extends React.Component {
 
 
 
-   handleSubmit = () => {
+  handleSubmit = () => {
     if(this.state.question.length < 6){
       Alert.alert('Question must be atleast 6 letters long!');
     } else{
-    this.addQuestion(this.state.question, this.state.category);
-    Alert.alert('Question saved successfully');
-   };
+      this.addQuestion(this.state.question, this.state.category);
+      Alert.alert('Question saved successfully');
+    }
+  };
       
 
 
@@ -54,7 +55,7 @@ export default class HomeScreen extends React.Component {
     this.setState({
       modalVisible: isModalVisible
     });
-  }
+  };
 
 
   render() {
