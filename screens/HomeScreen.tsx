@@ -1,27 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, Modal } from 'react-native';
+import { StyleSheet, Text, View, Alert, Modal, Image } from 'react-native';
 import { Button, TextInput, Title } from 'react-native-paper';
 import { db } from '../src/config.jsx';
 
 export default class HomeScreen extends React.Component {
 
-constructor(props) {
-  super(props);
-  this.state = {
-    question: '',
-    category: '',
-    modalVisible: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      question: '',
+      category: '',
+      modalVisible: false
+    };
 
-  this.handleQuestionChange = this.handleQuestionChange.bind(this);
-  this.handleCategoryChange = this.handleCategoryChange.bind(this);
-}
+    this.handleQuestionChange = this.handleQuestionChange.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+  }
 
-  handleQuestionChange (e) {
+  handleQuestionChange(e) {
     this.setState({ question: e.nativeEvent.text });
   }
 
-  handleCategoryChange (e) {
+  handleCategoryChange(e) {
     this.setState({ category: e.nativeEvent.text });
   }
 
@@ -39,7 +39,7 @@ constructor(props) {
 
   handleModalViewPress = () => {
     let isModalVisible = this.state.modalVisible;
-    if(isModalVisible){
+    if (isModalVisible) {
       isModalVisible = false;
     } else {
       isModalVisible = true;
@@ -50,74 +50,85 @@ constructor(props) {
   }
 
 
-render() {
-  const { navigation } = this.props;
+  render() {
+    const { navigation } = this.props;
     return (
-        <View style={styles.container}>
-            <Button
-                icon="rocket"
-                mode="contained"
-                onPress={() => navigation.navigate('Themes')}>
-                    Start game
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require('../assets/question.jpg')}
+        />
+        <Button
+          icon="rocket"
+          onPress={() => navigation.navigate('Themes')}>
+          Start game
             </Button>
-            <Button
-            icon="rocket"
-            mode="contained"
-            onPress={this.handleModalViewPress}>
-              Add new questions
+        <Button
+          icon="rocket"
+          onPress={this.handleModalViewPress}>
+          Add new questions
             </Button>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={this.state.modalVisible}
-              onRequestClose={() => {
-                navigation.navigate("Home");
-              }}>
-                <View
-                  style={styles.modalWindow}
-                  > 
-                    <Title>Add a question</Title>
-                    <TextInput
-                      style={styles.input}
-                      label='Question'
-                      mode="outlined"
-                      value={this.state.question}
-                      onChange = {this.handleQuestionChange}
-                  />
-                  <TextInput
-                      style={styles.input}
-                      label='Category'
-                      mode="outlined"
-                      value={this.state.category}
-                      onChange = {this.handleCategoryChange}
-                  />
-                  <Button
-                  color="#841584"
-                  onPress={this.handleSubmit}>
-                    Upload
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            navigation.navigate("Home");
+          }}>
+          <View
+            style={styles.modalWindow}
+          >
+            <Title>Add a question</Title>
+            <TextInput
+              style={styles.input}
+              label='Question'
+              mode="outlined"
+              value={this.state.question}
+              onChange={this.handleQuestionChange}
+            />
+            <TextInput
+              style={styles.input}
+              label='Category'
+              mode="outlined"
+              value={this.state.category}
+              onChange={this.handleCategoryChange}
+            />
+            <Button
+              color="#841584"
+              onPress={this.handleSubmit}>
+              Upload
                   </Button>
-                  <Button
-                  style={styles.button}
-                  mode="contained"
-                  onPress={this.handleModalViewPress}>
-                    Close
+            <Button
+              style={styles.button}
+              mode="contained"
+              onPress={this.handleModalViewPress}>
+              Close
                   </Button>
-                </View>
-            </Modal>
-        </View>
+          </View>
+        </Modal>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 400,
-    
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  separator: {
+    borderBottomColor: '#bbb',
+    borderBottomWidth: StyleSheet.hairlineWidth
+  },
+  image: {
+    width: 400,
+    height: 500,
+    marginBottom: 40
   },
   input: {
-      marginTop: 20,
-      width: 300,
-      alignSelf: "center"
+    marginTop: 20,
+    width: 300,
+    alignSelf: "center"
   },
   modalWindow: {
     flex: 1,
