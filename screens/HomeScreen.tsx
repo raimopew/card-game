@@ -40,6 +40,7 @@ export default class HomeScreen extends React.Component {
     } else{
     this.addQuestion(this.state.question, this.state.category);
     Alert.alert('Question saved successfully');
+    }
    };
       
 
