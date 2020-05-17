@@ -26,23 +26,32 @@ export default class HomeScreen extends React.Component {
   }
 
   addQuestion = (question, category) => {
-    db.ref('/questions').push({
-      question: question,
-      category: category
+    db.ref('/questions').orderByChild("question").equalTo(question).once("value", snapshot => {
+      if (snapshot.exists()){
+        Alert.alert('Question already exists');
+      } else {
+        db.ref('/questions').push({
+          question: question,
+          category: category
+        });
+        Alert.alert('Question saved successfully');
+      };
     });
   };
+
 
 
 
    handleSubmit = () => {
     if(this.state.question.length < 6){
       Alert.alert('Question must be atleast 6 letters long!');
-    } else{
+    } else if (this.state.category.length == 0) {
+      Alert.alert('Category cannot be empty!');
+    } else {
     this.addQuestion(this.state.question, this.state.category);
-    Alert.alert('Question saved successfully');
     }
    };
-      
+
 
 
   handleModalViewPress = () => {
