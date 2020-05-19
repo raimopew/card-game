@@ -62,7 +62,9 @@ export default class GameScreen extends React.Component {
   setCurrentQuestion = () => {
     let questionsArr = this.state.questions;
     let randomIndex = Math.floor(Math.random() * questionsArr.length);
-    this.setState(this.setStateForCurrentQuestion(this.state, questionsArr[randomIndex].question));
+    if(questionsArr[randomIndex].question !== undefined){
+      this.setState(this.setStateForCurrentQuestion(this.state, questionsArr[randomIndex].question));
+    }
   };
 
   async componentDidMount() {
