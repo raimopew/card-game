@@ -4,6 +4,10 @@ This is meant as a party/"getting to know each other" game where one or multiple
 
 Available for Web, iOS and Android.
 
+## Video
+
+http://www.tlu.ee/~peeterr/Mobiilirakendused/2020-05-18%2016-31-10.mp4
+
 ## Features
 
 * Answer or skip questions
