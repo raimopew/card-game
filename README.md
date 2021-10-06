@@ -35,7 +35,7 @@ expo start
 
 ## Authors
 
-* **[Raimo Pregel](https://github.com/raimop)**
+* **[Raimo Pregel](https://github.com/raimopew)**
 * **[Kristjan Treimann](https://github.com/KristjanTreimann)**
 * **[Daniel Golubkov](https://github.com/dangol9)**
 * **[Laur Tõnisson](https://github.com/lauuur)**
